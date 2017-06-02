@@ -19,7 +19,7 @@
 
 angular
   .module('allison', ['ui.router'])
-  .config(funtion($stateProvider, $urlRouterProvider, $locationProvider) {
+  .config(function($stateProvider, $urlRouterProvider, $locationProvider) {
     $stateProvider
       .state('home', {
         url: '/',
