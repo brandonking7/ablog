@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   devise_for :users
 
+  namespace :api do
+    resources :posts, only: [:index]
+  end
+
   root to: 'client#index'
   get '*path', to: 'client#index'
 
