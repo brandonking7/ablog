@@ -24,6 +24,10 @@ angular
       .state('home', {
         url: '/',
         component: 'homePage'
+      })
+      .state('posts', {
+      url: '/posts',
+      component: 'posts'
       });
 
     $urlRouterProvider.otherwise('/');

@@ -16,7 +16,8 @@ gem 'devise'
 gem 'angular_rails_csrf'
 gem 'jquery-rails'
 gem 'jbuilder', '~> 2.5'
-
+gem 'pry'
+gem 'awesome_print'
 
 group :development, :test do
   gem 'byebug', platform: :mri
