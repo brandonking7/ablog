@@ -2,7 +2,9 @@ Rails.application.routes.draw do
   devise_for :users
 
   namespace :api do
-    resources :posts, only: [:index]
+    resources :posts, only: [:index] do
+      resources :comments
+    end
   end
 
   root to: 'client#index'
