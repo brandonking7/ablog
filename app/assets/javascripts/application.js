@@ -25,9 +25,9 @@ angular
         url: '/',
         component: 'homePage'
       })
-      .state('posts', {
-      url: '/posts',
-      component: 'posts'
+      .state('postShow', {
+      url: '/posts/:id',
+      component: 'postShow'
       });
 
     $urlRouterProvider.otherwise('/');

@@ -1,9 +1,5 @@
 <h1>This is Allisons Blog Home Page</h1>
-
-<p>
-<!-- {{ $ctrl.message }} -->
-<ul ng-repeat="post in $ctrl.posts">
-  <li>{{post.title}}</li>
-  <li>{{post.content}}</li>
-</ul>
-</p>
+<div ng-repeat="post in $ctrl.posts">
+  <h2><a ui-sref="postShow({id: post.id})">{{ post.title }}</a></h2>
+  <p>{{post.content}}</p>
+</div>
