@@ -31,7 +31,6 @@ class Api::PostsController < ApplicationController
 
   end
 
-
   def update
     @post = Post.find(params[:id])
 
@@ -54,6 +53,5 @@ class Api::PostsController < ApplicationController
   def post_params
     params.require(:post)
           .permit(:title, :content, :user_id, :post_id)
-
   end
 end

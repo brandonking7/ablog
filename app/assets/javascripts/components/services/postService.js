@@ -10,6 +10,9 @@ angular
 
     service.getPosts = getPosts;
     service.getPost = getPost;
+    service.createPost = createPost;
+    // service.updatePost = updatePost;
+    // service.deletePost = deletePost;
 
     return service;
 
@@ -20,5 +23,9 @@ angular
     function getPost(id) {
       console.log('Individual Post!');
       return $http.get('/api/posts/' + id);
+    }
+    function createPost(post) {
+      console.log(post);
+      return $http.post('/api/posts/', post);
     }
   }

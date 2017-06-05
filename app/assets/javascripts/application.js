@@ -25,9 +25,17 @@ angular
         url: '/',
         component: 'homePage'
       })
+      .state('postNew', {
+        url: '/posts/new',
+        component: 'postNew'
+      })
+      .state('postEdit', {
+        url: '/posts/:id',
+        component: 'postEdit'
+      })
       .state('postShow', {
-      url: '/posts/:id',
-      component: 'postShow'
+        url: '/posts/:id',
+        component: 'postShow'
       });
 
     $urlRouterProvider.otherwise('/');
