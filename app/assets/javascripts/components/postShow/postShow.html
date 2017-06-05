@@ -1,4 +1,13 @@
-<h1>Post Show page</h1>
-{{ $ctrl.post.title }}
-{{$ctrl.post.comments}}
+
+<h2>{{ $ctrl.post.title }}</h2>
+<a href="#">Edit Post</a>
+<form class="" action="index.html" method="delete">
+
+</form>
+<br>
+<!-- {{}} -->
+<div ng-repeat="comment in $ctrl.post.comments">
+{{comment.message}}
+</div>
+<!-- {{$ctrl.post.comments}} -->
 <a ui-sref="home">Back</a>

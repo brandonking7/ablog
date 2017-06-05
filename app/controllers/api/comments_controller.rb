@@ -1,4 +1,5 @@
 class Api::CommentsController < ApplicationController
+  before_action :find_post
   # def index
   #   post = Post.find(params[:post_id])
   #   # post = Post.where(post_id: post.id)
@@ -18,4 +19,11 @@ class Api::CommentsController < ApplicationController
   def destroy
 
   end
+
+  private
+
+  def find_post
+    @post = Post.find(params[:id])
+  end
+
 end
