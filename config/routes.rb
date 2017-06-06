@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   devise_for :users
 
   namespace :api do
-    resources :posts, only: [:index, :show] do
+    resources :posts do
       resources :comments
     end
   end

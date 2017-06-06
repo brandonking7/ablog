@@ -17,7 +17,7 @@ function PostNewController($state, postService) {
   function savePost() {
     postService.createPost(vm.post)
                 .then((response) => {
-                  if(reponse.status === 201) {
+                  if(response.status === 201) {
                     $state.go('home')
                   } else {
                     alert('Server is down');
