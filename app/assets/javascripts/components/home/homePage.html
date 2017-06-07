@@ -1,10 +1,8 @@
 <h1>This is Allisons Blog Home Page</h1>
 <a ui-sref="postNew">New Post</a>
 <br>
-<!-- <a ui-sref="$ctrl.postShow({id: post.id})">Show</a> -->
 <div ng-repeat="post in $ctrl.posts">
   <h2><a ui-sref="postShow({id: post.id})">{{post.title}}</a></h2>
-  <a ui-sref="postShow({id: post.id})">Show</a>
   <p>{{post.content}}</p>
   <p>{{post.comments.count}}</p>
 </div>

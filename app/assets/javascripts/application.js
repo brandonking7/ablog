@@ -30,7 +30,7 @@ angular
         component: 'postNew'
       })
       .state('postEdit', {
-        url: '/posts/:id',
+        url: '/posts/:id/edit',
         component: 'postEdit'
       })
       .state('postShow', {

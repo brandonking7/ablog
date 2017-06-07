@@ -8,17 +8,18 @@ function PostEditController($stateParams, $state, postService) {
   var vm = this;
 
   vm.post = {};
-  vm.savePost = savePost;
+  vm.updatePost = updatePost;
 
   postService.getPost($stateParams.id).then(function(response) {
     vm.post = response.data;
     console.log(response);
   });
 
-  function savePost() {
+  function updatePost() {
     postService.updatePost(vm.post.id, vm.post).then((response) => {
+      console.log('PostEditController' + ' ' + response.data.id)
       if(response.status == 200) {
-        $state.go('postShow', { post_id: response.data.post_id })
+        $state.go('postShow', { id: response.data.id })
       } else {
         alert('Update had a problem!')
       }
