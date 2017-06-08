@@ -13,7 +13,9 @@ class Api::CommentsController < ApplicationController
   end
 
   def create
+    @comment = Comment.find(params[:id])
 
+    render json: @comment
   end
 
   def destroy
