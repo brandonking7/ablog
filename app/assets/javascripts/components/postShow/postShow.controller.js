@@ -2,16 +2,21 @@ angular
   .module('allison')
   .controller('PostShowController', PostShowController);
 
-  PostShowController.$inject = ['$stateParams', '$state', 'postService'];
+  PostShowController.$inject = ['$stateParams', '$state', 'postService', 'commentService'];
 
-  function PostShowController($stateParams, $state, postService) {
+  function PostShowController($stateParams, $state, postService, commentService) {
 
     var vm = this;
 
     vm.post = [];
+    vm.comment = {
+      message: ''
+    };
     vm.postDelete = postDelete;
+    vm.addComment = addComment;
 
-    // vm.post = $stateParams.post_id;
+
+    // vm.post_id = $stateParams.post_id;
 
     activate();
 
@@ -27,4 +32,17 @@ angular
         $state.go('home')
       });
     }
+      function addComment() {
+        commentService.createComment(vm.comment, $stateParams.id)
+        .then((response) => {
+          if(response.status === 201) {
+            console.log('Saved comment')
+          } else {
+            alert('Server is down');
+          }
+
+        })
+
+      }
+
   }

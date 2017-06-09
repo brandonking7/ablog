@@ -19,8 +19,9 @@ angular
       // console.log(post_id)
       // return $http.get('/api/posts/' + post_id + '/comments')
     }
-    function createComment(comment) {
-      console.log(comment)
-      // return $http.post('/api/')
+    function createComment(comment, post_id) {
+      console.log(comment + post_id);
+      return $http.post('/api/posts/' + post_id + '/comments/', comment)
+
     }
   }

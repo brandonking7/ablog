@@ -1,21 +1,25 @@
 class Api::CommentsController < ApplicationController
-  before_action :find_post
-  # def index
-  #   post = Post.find(params[:post_id])
-  #   # post = Post.where(post_id: post.id)
-  #   @comments = post.comments.all
-  #
-  #   render json: @comments
-  # end
+  before_action :find_commentable
+  def index
+    post = Post.find(params[:post_id])
+    # post = Post.where(post_id: post.id)
+    @comments = post.comments.all
+
+    render json: @comments
+  end
 
   def show
 
   end
 
   def create
-    @comment = Comment.find(params[:id])
+    @comment = @commentable.comments.new(comment_params)
 
-    render json: @comment
+    if @comment.save
+      render json: @comment, status: :created
+    else
+      render json: @comment.errors, status: :unprocessable_entity
+    end
   end
 
   def destroy
@@ -24,8 +28,13 @@ class Api::CommentsController < ApplicationController
 
   private
 
-  def find_post
-    @post = Post.find(params[:id])
+  def comment_params
+   params.require(:comment).permit(:message).merge(user_id: current_user.id)
+  end
+
+  def find_commentable
+   @commentable = Comment.find_by_id(params[:comment_id]) if params[:comment_id]
+   @commentable = Post.find_by_id(params[:post_id]) if params[:post_id]
   end
 
 end
