@@ -12,6 +12,10 @@ class Api::CommentsController < ApplicationController
 
   end
 
+  def new
+
+  end
+
   def create
     @comment = @commentable.comments.new(comment_params)
 

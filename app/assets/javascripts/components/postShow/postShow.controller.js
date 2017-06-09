@@ -14,6 +14,7 @@ angular
     };
     vm.postDelete = postDelete;
     vm.addComment = addComment;
+    // vm.newComment = {message: ''};
 
 
     // vm.post_id = $stateParams.post_id;
@@ -26,23 +27,31 @@ angular
         console.log(response);
       });
     }
+
     function postDelete(id) {
       console.log("PostShowController" + $stateParams.id);
       postService.deletePost($stateParams.id).then(function(response) {
         $state.go('home')
       });
     }
-      function addComment() {
+
+    function addComment() {
+      // vm.comments.push(vm.comment)
         commentService.createComment(vm.comment, $stateParams.id)
         .then((response) => {
           if(response.status === 201) {
-            console.log('Saved comment')
+             vm.post.comments.push(response.data);
+            //  or
+            //  vm.post.comments.push(vm.comment);
+            // To just reload the page
+            // window.location.pathname = '/posts/' + $stateParams.id
+            vm.comment = {
+              message: ''
+            };
+            console.log('Saved Comment')
           } else {
             alert('Server is down');
           }
-
-        })
-
+        });
       }
-
   }
