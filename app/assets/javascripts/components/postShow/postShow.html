@@ -10,6 +10,12 @@
 <!-- {{}} -->
 <div ng-repeat="comment in $ctrl.post.comments">
 {{comment.message}}
+<a style="font-size: 14px;" href="#">Reply</a>
+<a style="font-size: 14px;" href="#">Edit</a>
+<form ng-submit="$ctrl.commentDelete(comment.post_id, comment.id)">
+<button type="submit">Delete</button>
+</form>
+<br>
 </div>
 <br>
 <!-- <input type="textarea" placeholder="Write your comment..." ng-model="$ctrl.comment.message"> -->

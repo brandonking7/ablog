@@ -4,9 +4,11 @@
     <label for="">Title</label>
     <input type="text"  class="validate" ng-model="$ctrl.post.title">
   </div>
+  <br>
   <div class="">
     <label for="">Content</label>
-    <input type="text" class="validate" ng-model="$ctrl.post.content">
+    <br>
+    <textarea  placeholder="Write your comment..." rows="8" cols="80" ng-model="$ctrl.post.content"></textarea>
   </div>
   <div>
     <button ng-click="$ctrl.updatePost()">Save Post</button>

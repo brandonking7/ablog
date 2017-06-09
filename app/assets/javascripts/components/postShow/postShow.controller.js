@@ -9,15 +9,13 @@ angular
     var vm = this;
 
     vm.post = [];
+    vm.postDelete = postDelete;
     vm.comment = {
       message: ''
     };
-    vm.postDelete = postDelete;
     vm.addComment = addComment;
-    // vm.newComment = {message: ''};
-
-
-    // vm.post_id = $stateParams.post_id;
+    vm.updateComment = updateComment;
+    vm.commentDelete = commentDelete;
 
     activate();
 
@@ -36,11 +34,11 @@ angular
     }
 
     function addComment() {
-      // vm.comments.push(vm.comment)
         commentService.createComment(vm.comment, $stateParams.id)
         .then((response) => {
           if(response.status === 201) {
-             vm.post.comments.push(response.data);
+            //  vm.post.comments.push(response.data);
+            activate();
             //  or
             //  vm.post.comments.push(vm.comment);
             // To just reload the page
@@ -54,4 +52,28 @@ angular
           }
         });
       }
+      function updateComment() {
+        vm.comment = {}
+        commentService.updateComment(vm.post.id, vm.comment.id, vm.comment)
+          .then((response) => {
+            if(response.status == 200) {
+              activate();
+              console.log('Update Successful!')
+            } else {
+              alert('Update failed, something went wrong')
+            }
+          });
+
+      }
+
+      function commentDelete(post_id, comment_id) {
+        commentService.deleteComment(post_id, comment_id)
+          .then((response) => {
+            console.log('Deleted a comment');
+            activate();
+          });
+
+      }
+
+
   }
