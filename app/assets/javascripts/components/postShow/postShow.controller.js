@@ -13,11 +13,27 @@ angular
     vm.comment = {
       message: ''
     };
+    vm.updatedComment = {};
     vm.addComment = addComment;
-    vm.updateComment = updateComment;
+    vm.saveComment = saveComment;
     vm.commentDelete = commentDelete;
+    vm.editComment = false;
+    vm.setComment = setComment;
+    vm.commentNumber = 0;
+    vm.toggleDisplay = toggleDisplay;
+
 
     activate();
+
+    //adds class to just a single comment
+    function toggleDisplay(index) {
+      vm.comment[index] = ! vm.comment[index];
+    }
+
+    function setComment(index) {
+      vm.commentNumber = index;
+      vm.editComment = true;
+    }
 
     function activate() {
       postService.getPost($stateParams.id).then(function(response) {
@@ -52,11 +68,15 @@ angular
           }
         });
       }
-      function updateComment() {
-        vm.comment = {}
-        commentService.updateComment(vm.post.id, vm.comment.id, vm.comment)
+      vm.comment = {};
+      function saveComment(comment_id) {
+        console.log(comment_id)
+        console.log(vm.comment.message)
+        vm.editComment = true;
+        commentService.updateComment(vm.post.id, comment_id, vm.comment)
           .then((response) => {
             if(response.status == 200) {
+              vm.editComment = false;
               activate();
               console.log('Update Successful!')
             } else {

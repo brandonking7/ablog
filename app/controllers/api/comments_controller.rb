@@ -30,7 +30,7 @@ class Api::CommentsController < ApplicationController
     @comment = Comment.find(params[:id])
 
     if @comment.update(comment_params)
-      redner json: @comment, status: :ok
+      render json: @comment, status: :ok
     else
       render json: @comment, status: :unprocessable_entity
     end
