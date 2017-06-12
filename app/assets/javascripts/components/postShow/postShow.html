@@ -9,39 +9,43 @@
 <br>
 <!-- {{}} -->
 <div ng-repeat="comment in $ctrl.post.comments">
-<div ng-class="{'hidden': $ctrl.editComment}">
-{{comment.message}}
-<a style="font-size: 14px;" href="#">Reply</a>
-<!-- <input type="button" ng-click="$ctrl.setComment($index)" value="Edit"> -->
-<input type="button" ng-click="$ctrl.toggleDisplay($index)" value="Edit">
+  <!-- <div ng-class="{'hidden': $ctrl.editComment}"> -->
+  <div ng-hide="$ctrl.comment[$index]">
+  {{comment.message}}
+  <br>
+  <a style="font-size: 14px;" href="#">Reply</a>
+  <!-- <input type="button" ng-click="$ctrl.setComment($index)" value="Edit"> -->
+  <input type="button" ng-click="$ctrl.toggleDisplay($index)" value="Edit">
 
-<!-- <div ng-class="{'hidden': $ctrl.editComment}" ng-if="$ctrl.editComment === true"> -->
-</div>
-<div ng-show="$ctrl.comment[$index]">
-<form ng-submit="$ctrl.saveComment(comment.id)">
-<textarea  placeholder="{{comment.message}}" rows="4" cols="80" ng-model="$ctrl.comment.message"></textarea>
-<br>
-<button type="submit">Comment</button>
-<br>
-</form>
-</div>
+  <!-- <div ng-class="{'hidden': $ctrl.editComment}" ng-if="$ctrl.editComment === true"> -->
+  </div>
+  <div ng-show="$ctrl.comment[$index]">
+  <form ng-submit="$ctrl.saveComment(comment.id)">
+  <textarea  placeholder="{{comment.message}}" rows="4" cols="80" ng-model="$ctrl.comment.message"></textarea>
+  <br>
+  <button ng-click="$ctrl.toggleDisplay($index); $ctrl.editComment = false" type="button" name="button">Cancel</button>
+  <button ng-click="$ctrl.comment[$index] = false" type="submit">Save</button>
+  <br>
+  </form>
+  </div>
 
-<form ng-submit="$ctrl.commentDelete(comment.post_id, comment.id)">
-<button type="submit">Delete</button>
-</form>
-<br>
+  <form ng-submit="$ctrl.commentDelete(comment.post_id, comment.id)">
+  <button type="submit">Delete</button>
+  </form>
+  <br>
 </div>
 
 <br>
 <!-- <input type="textarea" placeholder="Write your comment..." ng-model="$ctrl.comment.message"> -->
 <div ng-class="{'hidden': $ctrl.editComment}">
-<h2>New comment</h2>
-<form ng-submit="$ctrl.addComment()">
-<textarea  placeholder="Write your comment..." rows="8" cols="80" ng-model="$ctrl.comment.message"></textarea>
-<br>
-<button type="submit">Comment</button>
-<br>
-</form>
+<!-- <div ng-hide="$ctrl.comment"> -->
+  <h2>New comment</h2>
+  <form ng-submit="$ctrl.addComment()">
+  <textarea  placeholder="Write your comment..." rows="8" cols="80" ng-model="$ctrl.comment.message"></textarea>
+  <br>
+  <button type="submit">Comment</button>
+  <br>
+  </form>
 </div>
 <!-- {{$ctrl.post.comments}} -->
 <a ui-sref="home">Back</a>

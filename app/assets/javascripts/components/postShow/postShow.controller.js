@@ -28,6 +28,7 @@ angular
     //adds class to just a single comment
     function toggleDisplay(index) {
       vm.comment[index] = ! vm.comment[index];
+      vm.editComment = true;
     }
 
     function setComment(index) {
@@ -77,6 +78,9 @@ angular
           .then((response) => {
             if(response.status == 200) {
               vm.editComment = false;
+              vm.comment = {
+                message: ''
+              };
               activate();
               console.log('Update Successful!')
             } else {
