@@ -6,7 +6,9 @@
   </div>
   <div class="">
     <label for="">Content</label>
-    <input type="text" class="validate" ng-model="$ctrl.post.content">
+    <br>
+    <!-- <input type="text" rows="8" cols="80" class="validate" ng-model="$ctrl.post.content"> -->
+    <textarea  placeholder="create your post Allison..." rows="8" cols="80" ng-model="$ctrl.post.content"></textarea>
   </div>
   <div>
     <button ng-click="$ctrl.savePost()">Post</button>

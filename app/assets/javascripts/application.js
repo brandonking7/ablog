@@ -17,6 +17,8 @@
 //= require_self
 //= require_tree .
 
+
+
 angular
   .module('allison', ['ui.router'])
   .config(function($stateProvider, $urlRouterProvider, $locationProvider) {

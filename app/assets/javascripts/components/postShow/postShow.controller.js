@@ -21,6 +21,8 @@ angular
     vm.setComment = setComment;
     vm.commentNumber = 0;
     vm.toggleDisplay = toggleDisplay;
+    vm.commentReply = false;
+    vm.replyToggle = replyToggle;
 
 
     activate();
@@ -31,6 +33,10 @@ angular
       vm.editComment = true;
     }
 
+    function replyToggle(index) {
+      vm.commentReply = true;
+
+    }
     function setComment(index) {
       vm.commentNumber = index;
       vm.editComment = true;
