@@ -13,7 +13,7 @@ angular
     vm.comment = {
       message: ''
     };
-    vm.updatedComment = {};
+    // vm.updatedComment = {};
     vm.addComment = addComment;
     vm.saveComment = saveComment;
     vm.commentDelete = commentDelete;
@@ -76,11 +76,12 @@ angular
         });
       }
       vm.comment = {};
+      vm.updatedComment = vm.comment;
       function saveComment(comment_id) {
         console.log(comment_id)
-        console.log(vm.comment.message)
+        console.log(vm.updatedComment.message)
         vm.editComment = true;
-        commentService.updateComment(vm.post.id, comment_id, vm.comment)
+        commentService.updateComment(vm.post.id, comment_id, vm.updatedComment)
           .then((response) => {
             if(response.status == 200) {
               vm.editComment = false;

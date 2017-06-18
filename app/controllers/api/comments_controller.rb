@@ -1,9 +1,10 @@
 class Api::CommentsController < ApplicationController
   before_action :find_commentable
   def index
-    post = Post.find(params[:post_id])
-    # post = Post.where(post_id: post.id)
-    @comments = post.comments.all
+    # post = Post.find(params[:post_id])
+      # post = Post.where(post_id: post.id)
+    # @comments = post.comments.all
+    @comments = Comment.all
 
     render json: @comments
   end

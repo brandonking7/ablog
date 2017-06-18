@@ -8,10 +8,18 @@
 </form>
 <br>
 <!-- {{}} -->
+
 <div ng-repeat="comment in $ctrl.post.comments">
   <!-- <div ng-class="{'hidden': $ctrl.editComment}"> -->
   <div ng-hide="$ctrl.comment[$index]">
   {{comment.message}}
+  <br>
+  <h4>Replies</h4>
+  <div ng-repeat="comment in comment.comments">
+    {{comment.message}}
+  </div>
+
+
   <br>
 
   <!-- ***** Reply Button ***** -->
@@ -38,7 +46,7 @@
   <!-- edit comment -->
   <div ng-show="$ctrl.comment[$index]">
     <form ng-submit="$ctrl.saveComment(comment.id)">
-    <textarea  placeholder="{{comment.message}}" rows="4" cols="80" ng-model="$ctrl.comment.message">{{comment.message}}</textarea>
+    <textarea ng-value="comment.message" rows="4" cols="80" ng-model="$ctrl.comment.message">{{comment.message}}</textarea>
     <br>
     <button ng-click="$ctrl.toggleDisplay($index); $ctrl.editComment = false" type="button" name="button">Cancel</button>
     <button ng-click="$ctrl.comment[$index] = false" type="submit">Save</button>

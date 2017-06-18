@@ -10,7 +10,15 @@ class Api::PostsController < ApplicationController
   def show
     @post = Post.find(params[:id])
 
-    render json: @post.to_json(include: [:comments])
+    # render json: @post.to_json(include: [:comments])
+
+    # Working Version Of inlcuding nested relationships
+    render json: @post.to_json(include: {comments: {include: :comments}})
+
+    # konata.to_json(:include => { :posts => {
+    #                              :include => { :comments => {
+    #                                            :only => :body } },
+    #                              :only => :title } })
 
     # post = Post.find(params[:id])
     # post = Post.where(post_id: post.id)
