@@ -14,28 +14,9 @@
   <div ng-hide="$ctrl.comment[$index]">
   {{comment.message}}
   <br>
-  <h4>Replies</h4>
-  <div ng-repeat="comment in comment.comments">
-    {{comment.message}}
-  </div>
 
 
-  <br>
 
-  <!-- ***** Reply Button ***** -->
-  <a style="font-size: 14px;" ng-click="$ctrl.replyToggle($index)" ui-sref="#">Reply</a>
-  <!-- ***** Reply to comment ***** -->
-    <div ng-class="{'hidden': !$ctrl.commentReply}">
-    <!-- <div ng-hide="$ctrl.comment"> -->
-      <form ng-submit="$ctrl.addComment()">
-      <textarea placeholder="Write your reply..." rows="8" cols="80" ></textarea>
-      <br>
-      <button ng-click="$ctrl.toggleDisplay($index); $ctrl.editComment = false" type="button" name="button">Cancel</button>
-      <button type="submit">Reply</button>
-      <br>
-      </form>
-    </div>
-    <!-- ***** End Reply to comment ***** -->
 
   <!-- <input type="button" ng-click="$ctrl.setComment($index)" value="Edit"> -->
   <input type="button" ng-click="$ctrl.toggleDisplay($index)" value="Edit">
@@ -57,6 +38,30 @@
   <form ng-submit="$ctrl.commentDelete(comment.post_id, comment.id)">
   <button type="submit">Delete</button>
   </form>
+  <br>
+
+  <!-- ***** Reply Button ***** -->
+  <a style="font-size: 14px;" ng-click="$ctrl.replyToggle($index)" ui-sref="#">Reply</a>
+  <br>
+  <h4>Replies</h4>
+  <div ng-repeat="comment in comment.comments">
+    {{comment.message}}
+  </div>
+  <!-- ***** Reply to comment ***** -->
+    <div ng-class="{'hidden': !$ctrl.commentReply}">
+    <!-- <div ng-hide="$ctrl.comment"> -->
+      <form ng-submit="$ctrl.addReply(comment.id)">
+      <textarea placeholder="Write your reply..." rows="8" cols="80" ng-model="$ctrl.comment.message"></textarea>
+      <br>
+      <button ng-click="$ctrl.replyToggle($index); $ctrl.commentReply = false" type="button" name="button">Cancel</button>
+      <button type="submit">Reply</button>
+      <br>
+      </form>
+    </div>
+    <!-- ***** End Reply to comment ***** -->
+
+
+  <br>
   <br>
 </div>
 

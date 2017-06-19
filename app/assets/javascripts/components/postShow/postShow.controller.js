@@ -23,6 +23,7 @@ angular
     vm.toggleDisplay = toggleDisplay;
     vm.commentReply = false;
     vm.replyToggle = replyToggle;
+    vm.addReply = addReply;
 
 
     activate();
@@ -34,6 +35,7 @@ angular
     }
 
     function replyToggle(index) {
+      // vm.comment[index] = ! vm.comment[index];
       vm.commentReply = true;
 
     }
@@ -104,6 +106,22 @@ angular
             activate();
           });
 
+      }
+
+      function addReply(comment_id) {
+        console.log(comment_id);
+        commentService.createReply(comment_id, vm.comment)
+          .then((response) => {
+            if(response.status == 201) {
+              vm.comment = {
+                message: ''
+              };
+              activate();
+              console.log('Reply added & saved!')
+            } else {
+              alert('Reply failed for some reason!')
+            }
+          });
       }
 
 

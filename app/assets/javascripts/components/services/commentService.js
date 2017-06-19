@@ -12,6 +12,9 @@ angular
     service.updateComment = updateComment;
     service.deleteComment = deleteComment;
 
+    service.createReply = createReply;
+
+
 
     return service;
 
@@ -32,6 +35,11 @@ angular
     }
     function deleteComment(post_id, comment_id) {
       return $http.delete('/api/posts/' + post_id + '/comments/' + comment_id )
+    }
+
+    function createReply(comment_id, comment) {
+      console.log(comment + comment_id);
+      return $http.post('/api/comments/' + comment_id + '/comments', comment)
     }
 
 
