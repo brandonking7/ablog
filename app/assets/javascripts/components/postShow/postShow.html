@@ -41,14 +41,15 @@
   <br>
 
   <!-- ***** Reply Button ***** -->
-  <a style="font-size: 14px;" ng-click="$ctrl.replyToggle($index)" ui-sref="#">Reply</a>
+  <a style="font-size: 14px;" ng-click="$ctrl.replyToggle($index); $ctrl.comment[$index] = false" ui-sref="#">Reply</a>
   <br>
   <h4>Replies</h4>
   <div ng-repeat="comment in comment.comments">
     {{comment.message}}
   </div>
   <!-- ***** Reply to comment ***** -->
-    <div ng-class="{'hidden': !$ctrl.commentReply}">
+    <!-- <div ng-class="{'hidden': !$ctrl.commentReply}"> -->
+    <div ng-show="$ctrl.reply[$index]">
     <!-- <div ng-hide="$ctrl.comment"> -->
       <form ng-submit="$ctrl.addReply(comment.id)">
       <textarea placeholder="Write your reply..." rows="8" cols="80" ng-model="$ctrl.comment.message"></textarea>

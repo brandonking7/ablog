@@ -24,6 +24,7 @@ angular
     vm.commentReply = false;
     vm.replyToggle = replyToggle;
     vm.addReply = addReply;
+    vm.reply = {}
 
 
     activate();
@@ -35,7 +36,8 @@ angular
     }
 
     function replyToggle(index) {
-      // vm.comment[index] = ! vm.comment[index];
+      vm.reply[index] = !vm.reply[index];
+      // vm.editComment = true;
       vm.commentReply = true;
 
     }
