@@ -25,6 +25,16 @@ angular
     vm.replyToggle = replyToggle;
     vm.addReply = addReply;
     vm.reply = {}
+    vm.saveReply = saveReply;
+    vm.editReply = false;
+    vm.updateToggle = updateToggle;
+    vm.updateReply = {}
+    vm.work = vm.comment;
+    // vm.testWork = copy(work);
+    vm.data = vm.comment
+    vm.testData = angular.copy(vm.comment.message);
+    // vm.$watch('show.name', showNameChanged);
+
 
 
     activate();
@@ -33,6 +43,11 @@ angular
     function toggleDisplay(index) {
       vm.comment[index] = ! vm.comment[index];
       vm.editComment = true;
+      // activate();
+      // vm.comment = {
+      //   message: ''
+      // };
+
     }
 
     function replyToggle(index) {
@@ -41,9 +56,21 @@ angular
       vm.commentReply = true;
 
     }
-    function setComment(index) {
-      vm.commentNumber = index;
-      vm.editComment = true;
+
+    function updateToggle(index) {
+      // activate();
+      vm.updateReply[index] = !vm.updateReply[index];
+      vm.editReply = true;
+      // vm.comment = {
+      //   message: ''
+      // };
+    }
+
+    function setComment() {
+      // vm.comment = {
+      //   message: ''
+      // };
+      // activate();
     }
 
     function activate() {
@@ -79,20 +106,22 @@ angular
           }
         });
       }
+      //Update Comment
       vm.comment = {};
-      vm.updatedComment = vm.comment;
+      // vm.updatedComment = vm.comment;
       function saveComment(comment_id) {
-        console.log(comment_id)
-        console.log(vm.updatedComment.message)
+        console.log(vm.post.id, comment_id)
+        console.log(vm.comment.message)
         vm.editComment = true;
-        commentService.updateComment(vm.post.id, comment_id, vm.updatedComment)
+        commentService.updateComment(vm.post.id, comment_id, vm.comment)
           .then((response) => {
             if(response.status == 200) {
-              vm.editComment = false;
+              // vm.editComment = false;
               vm.comment = {
                 message: ''
               };
               activate();
+              //  vm.post.comments.push(response.data);
               console.log('Update Successful!')
             } else {
               alert('Update failed, something went wrong')
@@ -119,9 +148,26 @@ angular
                 message: ''
               };
               activate();
+              // vm.commentReply = false;
               console.log('Reply added & saved!')
             } else {
               alert('Reply failed for some reason!')
+            }
+          });
+      }
+
+      function saveReply(comment_id) {
+        console.log($stateParams.id, comment_id)
+        commentService.updateReply($stateParams.id, comment_id, vm.comment)
+          .then((response) => {
+            if(response.status == 200) {
+              vm.comment = {
+                message: ''
+              };
+              activate();
+              console.log('Successfully updated a reply')
+            } else {
+              alert('Update failed, something went wrong')
             }
           });
       }

@@ -24,10 +24,10 @@
   <!-- <div ng-class="{'hidden': $ctrl.editComment}" ng-if="$ctrl.editComment === true"> -->
   </div>
 
-  <!-- edit comment -->
+  <!-- ***** Edit Comment ***** -->
   <div ng-show="$ctrl.comment[$index]">
-    <form ng-submit="$ctrl.saveComment(comment.id)">
-    <textarea ng-value="comment.message" rows="4" cols="80" ng-model="$ctrl.comment.message">{{comment.message}}</textarea>
+    <form name="userEditComment" ng-submit="$ctrl.saveComment(comment.id)">
+    <textarea name="userMessage" ng-value="comment.message" rows="4" cols="80" ng-model="$ctrl.comment.message" ng-model-options="{ updateOn: 'blur', debounce: 1000 }"></textarea>
     <br>
     <button ng-click="$ctrl.toggleDisplay($index); $ctrl.editComment = false" type="button" name="button">Cancel</button>
     <button ng-click="$ctrl.comment[$index] = false" type="submit">Save</button>
@@ -41,21 +41,39 @@
   <br>
 
   <!-- ***** Reply Button ***** -->
-  <a style="font-size: 14px;" ng-click="$ctrl.replyToggle($index); $ctrl.comment[$index] = false" ui-sref="#">Reply</a>
+  <a style="font-size: 14px;" ng-click="$ctrl.replyToggle($index); $ctrl.comment[$index] = false" href="#">Reply</a>
   <br>
   <h4>Replies</h4>
-  <div ng-repeat="comment in comment.comments">
-    {{comment.message}}
+  <div ng-repeat="(id, comment) in comment.comments">
+    <div ng-hide="$ctrl.updateReply[$index]">
+      {{id}}
+      {{comment.message}}
+    </div>
+
+      <button ng-hide="$ctrl.updateReply[$index]" type="button" ng-click="$ctrl.updateToggle($index)">Edit</button>
+      <!-- ***** Edit Reply ***** -->
+      <div ng-show="$ctrl.updateReply[$index]">
+        <form ng-submit="$ctrl.saveComment(comment.id)">
+        <textarea ng-value="comment.message" rows="4" cols="80" ng-model="$ctrl.comment.message"></textarea>
+        <!-- <textarea ng-value="comment.message" rows="4" cols="80" testData = "angular.copy($ctrl.comment.message)"></textarea> -->
+        <br>
+        <button ng-click="$ctrl.updateReply[$index] = false; $ctrl.setComment()" type="button" name="button">Cancel</button>
+        <button ng-click="$ctrl.updateReply[$index] = false" type="submit">Save</button>
+        <br>
+        </form>
+      </div>
+      <button type="button">Delete</button>
+
   </div>
   <!-- ***** Reply to comment ***** -->
     <!-- <div ng-class="{'hidden': !$ctrl.commentReply}"> -->
     <div ng-show="$ctrl.reply[$index]">
     <!-- <div ng-hide="$ctrl.comment"> -->
       <form ng-submit="$ctrl.addReply(comment.id)">
-      <textarea placeholder="Write your reply..." rows="8" cols="80" ng-model="$ctrl.comment.message"></textarea>
+      <textarea placeholder="Write your reply..." rows="8" cols="80" ng-model="$ctrl.comment.message; "></textarea>
       <br>
       <button ng-click="$ctrl.replyToggle($index); $ctrl.commentReply = false" type="button" name="button">Cancel</button>
-      <button type="submit">Reply</button>
+      <button ng-click="$ctrl.replyToggle($index); $ctrl.commentReply = false" type="submit">Reply</button>
       <br>
       </form>
     </div>
@@ -72,9 +90,9 @@
 <!-- <div ng-hide="$ctrl.comment"> -->
   <h2>New comment</h2>
   <form ng-submit="$ctrl.addComment()">
-  <textarea  placeholder="Write your comment..." rows="8" cols="80" ng-model="$ctrl.comment.message"></textarea>
+  <textarea  ng-readonly="expression" ng-disable="$ctrl.replyToggle($index)" placeholder="Write your comment..." rows="8" cols="80" ng-disable"($ctrl.comment.message != $ctrl.comment.message)" ng-model="$ctrl.comment.message" required></textarea>
   <br>
-  <button type="submit">Comment</button>
+  <button type="submit" ng-disabled="myForm.$invalid ">Comment</button>
   <br>
   </form>
 </div>

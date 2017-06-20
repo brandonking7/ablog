@@ -13,6 +13,7 @@ angular
     service.deleteComment = deleteComment;
 
     service.createReply = createReply;
+    service.updateReply = updateReply;
 
 
 
@@ -30,6 +31,7 @@ angular
 
     }
     function updateComment(post_id, comment_id, comment) {
+      console.log("its hitting comments")
       return $http.patch('/api/posts/' + post_id + '/comments/' + comment_id, comment)
 
     }
@@ -37,9 +39,14 @@ angular
       return $http.delete('/api/posts/' + post_id + '/comments/' + comment_id )
     }
 
+    // Replies
+
     function createReply(comment_id, comment) {
       console.log(comment + comment_id);
       return $http.post('/api/comments/' + comment_id + '/comments', comment)
+    }
+    function updateReply(comment_id, comment_id, comment) {
+      return $http.patch('/api/comments/' + comment_id + '/comments/' + comment_id)
     }
 
 
