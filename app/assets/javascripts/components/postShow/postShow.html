@@ -62,7 +62,9 @@
         <br>
         </form>
       </div>
-      <button type="button">Delete</button>
+      <form ng-submit="$ctrl.commentDelete(comment.post_id, comment.id)">
+      <button type="submit">Delete</button>
+      </form>
 
   </div>
   <!-- ***** Reply to comment ***** -->
