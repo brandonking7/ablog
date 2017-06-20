@@ -30,7 +30,7 @@
     <textarea name="userMessage" ng-value="comment.message" rows="4" cols="80" ng-model="$ctrl.comment.message" ng-model-options="{ updateOn: 'blur', debounce: 1000 }"></textarea>
     <br>
     <button ng-click="$ctrl.toggleDisplay($index); $ctrl.editComment = false" type="button" name="button">Cancel</button>
-    <button ng-click="$ctrl.comment[$index] = false" type="submit">Save</button>
+    <button ng-click="$ctrl.toggleDisplay($index)" type="submit">Save</button>
     <br>
     </form>
   </div>

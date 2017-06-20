@@ -112,7 +112,7 @@ angular
       function saveComment(comment_id) {
         console.log(vm.post.id, comment_id)
         console.log(vm.comment.message)
-        vm.editComment = true;
+        vm.editComment = false;
         commentService.updateComment(vm.post.id, comment_id, vm.comment)
           .then((response) => {
             if(response.status == 200) {
