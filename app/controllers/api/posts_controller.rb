@@ -1,4 +1,7 @@
 class Api::PostsController < ApplicationController
+  protect_from_forgery with: :exception
+  before_action :authenticate_user!, :except => [:index, :show]
+
   # GET /api/posts
   def index
     @posts = Post.all

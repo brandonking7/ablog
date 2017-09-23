@@ -27,6 +27,7 @@ angular
         url: '/',
         component: 'homePage'
       })
+      // .state('')
       .state('postNew', {
         url: '/posts/new',
         component: 'postNew'
